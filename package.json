@@ -4,7 +4,16 @@
   "description": "This is a sample vue project.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --progress --colors",
+    "clean": "gts clean",
+    "watch": "webpack -d --watch",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "check": "gts check",
+    "compile": "tsc -p .",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run check"
   },
   "author": "",
   "license": "ISC",
@@ -15,7 +24,9 @@
     "babel-preset-es2016": "^6.24.1",
     "eslint": "^4.14.0",
     "eslint-config-google": "^0.9.1",
+    "gts": "^0.5.3",
     "ts-loader": "^3.2.0",
+    "tslint": "^5.8.0",
     "typescript": "^2.6.2",
     "typings": "^2.1.1",
     "vue": "^2.5.13",
