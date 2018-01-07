@@ -1,7 +1,3 @@
-import Vue from 'vue'
+import Vue from 'vue';
 
-let app:Vue = new Vue({
-  el: '#app',
-  render: (h)=>h('p', 'Hello World')
-});
-
+const app: Vue = new Vue({el: '#app', render: (h) => h('p', 'Hello World')});
