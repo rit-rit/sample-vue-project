@@ -27,6 +27,8 @@
     "gts": "^0.5.3",
     "ts-loader": "^3.2.0",
     "tslint": "^5.8.0",
+    "tslint-loader": "^3.5.3",
+    "tslint-vue-loader": "0.0.6",
     "typescript": "^2.6.2",
     "typings": "^2.1.1",
     "vue": "^2.5.13",
