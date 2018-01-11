@@ -1,4 +1,13 @@
+'use strict'
+
+const path = require('path');
+
+function resolve(dir){
+  return path.join(__dirname, '..', dir);
+}
+
 module.exports = {
+  context:path.resolve(__dirname,'../'),
   entry: './src/ts/main.ts',
   output: {
     filename: './app/js/app.js',
@@ -7,15 +16,6 @@ module.exports = {
     extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
   },
   module: {
-    rules: [{
-      test: /\.ts(x?)$/,
-      enforce: 'pre',
-      exclude: /node_moduels/,
-      loader: 'tslint-loader',
-      options: {
-        appendTsSuffixTo: [/\.vue$/],
-      },
-    }],
     loaders: [
       {
         test: /\.vue$/,

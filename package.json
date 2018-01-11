@@ -4,7 +4,7 @@
   "description": "This is a sample vue project.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --progress --colors",
+    "build": "webpack --config build/webpack.config.js --progress --colors",
     "clean": "gts clean",
     "watch": "webpack -d --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -33,6 +33,7 @@
     "typings": "^2.1.1",
     "vue": "^2.5.13",
     "vue-loader": "^13.7.0",
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.10.1"
   }
 }
