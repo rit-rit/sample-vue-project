@@ -2,12 +2,12 @@
 
 const path = require('path');
 
-function resolve(dir){
+function resolve(dir) {
   return path.join(__dirname, '..', dir);
 }
 
 module.exports = {
-  context:path.resolve(__dirname,'../'),
+  context: path.resolve(__dirname, '../'),
   entry: './src/ts/main.ts',
   output: {
     filename: './app/js/app.js',
@@ -21,7 +21,7 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader', options: {
           loaders: {
-            ts: 'ts-loader!tslint-loader',
+            ts: 'ts-loader',
           },
         },
       },
