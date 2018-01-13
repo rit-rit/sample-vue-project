@@ -16,17 +16,11 @@ module.exports = {
     extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
   },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.vue$/,
-        loader: 'vue-loader', options: {
-          loaders: {
-            ts: 'ts-loader',
-          },
-        },
-      },
-      {
-        test: /\.tsx?$/, loader: 'ts-loader', options: {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        options: {
           appendTsSuffixTo: [/\.vue$/],
         },
       },
