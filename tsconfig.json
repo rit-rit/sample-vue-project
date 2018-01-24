@@ -7,7 +7,11 @@
     "lib": ["dom", "es5", "es2015.promise"],
     "module": "es2015",
     "moduleResolution": "node",
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "declaration": false
   },
   "include": ["src/*.ts", "src/**/*.ts", "test/*.ts", "test/**/*.ts"],
   "exclude": ["node_modules"]
