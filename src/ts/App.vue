@@ -1,6 +1,6 @@
 <template>
-<div><span v-bind:title="message">
-  Hover your mouse over me for a few second s to see my dynamically bound title!</span>
+<div>
+  <span v-if="seen">Now you see me</span>
 </div>
 </template>
 
@@ -8,7 +8,7 @@
 import Vue from "vue";
 export default Vue.extend({
   data() {
-    return { message: "You loaded thid page on " + new Date().toString() };
+    return { seen: true };
   }
 });
 </script>
