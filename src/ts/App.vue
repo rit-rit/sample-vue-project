@@ -1,6 +1,10 @@
 <template>
 <div>
-  <span v-if="seen">Now you see me</span>
+  <ol>
+    <li v-for="todo in todos">
+      {{ todo.text}}
+    </li>
+  </ol>
 </div>
 </template>
 
@@ -8,7 +12,13 @@
 import Vue from "vue";
 export default Vue.extend({
   data() {
-    return { seen: true };
+    return {
+      todos: [
+        { text: "Learn JavaScript" },
+        { text: "Learn Vue" },
+        { text: "Build somthing awesome" }
+      ]
+    };
   }
 });
 </script>
