@@ -1,7 +1,7 @@
 <template>
 <div>
   <p>{{message}}</p>
-  <button v-on:click="reverseMessage">Reverse Message</button>
+  <input v-model="message">
 </div>
 </template>
 
@@ -12,14 +12,6 @@ export default Vue.extend({
     return {
       message: "Hello Vue.js!"
     };
-  },
-  methods: {
-    reverseMessage: function() {
-      this.message = this.message
-        .split("")
-        .reverse()
-        .join("");
-    }
   }
 });
 </script>
