@@ -1,8 +1,24 @@
 <template>
 <div>
-  <p>{{a}}</p>
-  <button @click="a='updated'">Update</button>
-  <button @click="$destroy()">Destroy</button>
+  <p>Message: {{msg}}</p>
+  <p v-once>This will never change: {{msg}}</p>
+  <button @click="msg=msg + 'a'">change</button>
+  <br>
+  <p>Using mastaches:{{rawHtml}}</p>
+  <p>Using v-html directive:<span v-html="rawHtml"></span></p>
+  <p v-bind:id="dynamicId">dynamicId</p>
+  <button @click="dynamicId=dynamicId + 'a'">change</button>
+  <br>
+  <button v-bind:disabled="isButtonDisabled">Button</button>
+  <button @click="isButtonDisabled=!isButtonDisabled">change</button>
+  <br>
+  {{number +1}}
+  <br>
+  {{ok?"YES":"NO"}}
+  <button @click="ok=!ok">change</button>
+  <br>
+  {{message.split('').reverse().join('')}}
+  <div v-bind:id="'list-' +id"></div>
 </div>
 </template>
 
@@ -11,35 +27,15 @@ import Vue from "vue";
 export default Vue.extend({
   data() {
     return {
-      a: 1
+      msg: "Message",
+      rawHtml: "<span style='color:red'>This should be red</span>",
+      dynamicId: "Dynamic ID",
+      isButtonDisabled: true,
+      number: 1,
+      ok: true,
+      message: "Message",
+      id: "This is id"
     };
-  },
-  beforeCreate() {
-    console.log("Before Create");
-  },
-  created() {
-    console.log("Created");
-    console.log("a is: " + this.a);
-    console.log("has el:" + this.$el);
-  },
-  beforeMount() {
-    console.log("Before Mount");
-  },
-  mounted() {
-    console.log("el:" + this.$el);
-    console.log("Mounted");
-  },
-  beforeUpdate() {
-    console.log("Before Update");
-  },
-  updated() {
-    console.log("Updated");
-  },
-  beforeDestroy() {
-    console.log("Before Destroy");
-  },
-  destroyed() {
-    console.log("Destroyed");
   }
 });
 </script>
