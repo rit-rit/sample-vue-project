@@ -1,7 +1,7 @@
 <template>
 <div>
-<p>Original message: "{{message}}"</p>
-<p>Cumputed reversed message:"{{reversedMessage}}"</p>
+<p>Computed now: "{{now}}"</p>
+<p>Method now:"{{methodnow()}}"</p>
 </div>
 </template>
 
@@ -14,11 +14,13 @@ export default Vue.extend({
     };
   },
   computed: {
-    reversedMessage(): String {
-      return this.message
-        .split("")
-        .reverse()
-        .join("");
+    now(): String {
+      return Date.now().toString();
+    }
+  },
+  methods: {
+    methodnow(): String {
+      return Date.now().toString();
     }
   }
 });
