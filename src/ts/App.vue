@@ -1,7 +1,14 @@
 <template>
 <div>
-<p>Computed now: "{{now}}"</p>
-<p>Method now:"{{methodnow()}}"</p>
+<p>WatchedFullName:{{watchedFullName}}</p>
+WatchedFirstName: <input v-model="watchedFirstName">
+<br>
+WatchedLastName: <input v-model="watchedLastName">
+<p>ComputedFullName:{{computedFullName}}</p>
+ComputedfirstName: <input v-model="computedFirstName">
+<br>
+ComputedlastName: <input v-model="computedLastName">
+
 </div>
 </template>
 
@@ -10,17 +17,24 @@ import Vue from "vue";
 export default Vue.extend({
   data() {
     return {
-      message: "Hello"
+      watchedFirstName: "Foo",
+      watchedLastName: "Bar",
+      watchedFullName: "Foo Bar",
+      computedFirstName: "Foo",
+      computedLastName: "Bar"
     };
   },
-  computed: {
-    now(): String {
-      return Date.now().toString();
+  watch: {
+    firstName(val) {
+      this.watchedFullName = val + " " + this.watchedLastName;
+    },
+    lastName(val) {
+      this.watchedFullName = this.watchedFirstName + " " + val;
     }
   },
-  methods: {
-    methodnow(): String {
-      return Date.now().toString();
+  computed: {
+    computedFullName(): String {
+      return this.computedFirstName + " " + this.computedLastName;
     }
   }
 });
