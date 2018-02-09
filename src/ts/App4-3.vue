@@ -8,8 +8,7 @@ WatchedLastName: <input v-model="watchedLastName">
 ComputedfirstName: <input v-model="computedFirstName">
 <br>
 ComputedlastName: <input v-model="computedLastName">
-<br>
-ComputedFullName: <input v-model="computedFullName">
+
 </div>
 </template>
 
@@ -34,15 +33,8 @@ export default Vue.extend({
     }
   },
   computed: {
-    computedFullName: {
-      get(): String {
-        return this.computedFirstName + " " + this.computedLastName;
-      },
-      set(newValue: String): void {
-        var names: string[] = newValue.split(" ");
-        this.computedFirstName = names[0];
-        this.computedLastName = names[names.length - 1];
-      }
+    computedFullName(): String {
+      return this.computedFirstName + " " + this.computedLastName;
     }
   }
 });
