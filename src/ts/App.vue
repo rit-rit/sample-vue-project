@@ -1,49 +1,40 @@
 <template>
 <div>
-<p>WatchedFullName:{{watchedFullName}}</p>
-WatchedFirstName: <input v-model="watchedFirstName">
-<br>
-WatchedLastName: <input v-model="watchedLastName">
-<p>ComputedFullName:{{computedFullName}}</p>
-ComputedfirstName: <input v-model="computedFirstName">
-<br>
-ComputedlastName: <input v-model="computedLastName">
-<br>
-ComputedFullName: <input v-model="computedFullName">
+  <p v-bind:class="{active:isActive}">aaaa
+    <button @click="reverse()">Reverse!!</button>
+  </p>
+  <p v-bind:class="classObject">aaaa
+    <button @click="reverse()">Reverse!!</button>
+  </p>
 </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-export default Vue.extend({
-  data() {
-    return {
-      watchedFirstName: "Foo",
-      watchedLastName: "Bar",
-      watchedFullName: "Foo Bar",
-      computedFirstName: "Foo",
-      computedLastName: "Bar"
-    };
-  },
-  watch: {
-    firstName(val) {
-      this.watchedFullName = val + " " + this.watchedLastName;
-    },
-    lastName(val) {
-      this.watchedFullName = this.watchedFirstName + " " + val;
-    }
-  },
-  computed: {
-    computedFullName: {
-      get(): String {
-        return this.computedFirstName + " " + this.computedLastName;
-      },
-      set(newValue: String): void {
-        var names: string[] = newValue.split(" ");
-        this.computedFirstName = names[0];
-        this.computedLastName = names[names.length - 1];
-      }
-    }
+import Component from "vue-class-component";
+@Component
+export default class App extends Vue {
+  isActive: boolean = true;
+  error = null;
+
+  reverse(): void {
+    this.isActive = !this.isActive;
   }
-});
+  get classObject(): Object {
+    return {
+      active: Boolean(this.isActive),
+      "text-danger": !Boolean(this.isActive)
+    };
+  }
+}
 </script>
+
+<style scoped>
+.active {
+  color: blue;
+}
+.text-danger {
+  font-size: 200%;
+}
+</style>
+
