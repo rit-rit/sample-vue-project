@@ -1,6 +1,6 @@
 <template>
 <div>
-  <p v-bind:style="[styleObject,styleObject2]">aaaa
+  <p v-bind:style="{color:activeColor,fontSize:fontSize+'px'}">aaaa
   </p>  
   <p v-bind:style="styleObject">aaaa
   </p>
@@ -15,7 +15,6 @@ export default class App extends Vue {
   activeColor: String = "red";
   fontSize: String = "30";
   styleObject: Object = { color: "blue", fontSize: "13px" };
-  styleObject2: Object = { "background-color": "red" };
 }
 </script>
 
