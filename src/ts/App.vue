@@ -1,9 +1,14 @@
 <template>
 <div>
-  <p v-bind:style="[styleObject,styleObject2]">aaaa
-  </p>  
-  <p v-bind:style="styleObject">aaaa
-  </p>
+  <h1 v-if="ok">Yes</h1>
+  <h1 v-else>No</h1>
+  <button @click="reverse">Reverse</button>
+  <br>
+  <template v-if="ok">
+    <h1>Title</h1>
+    <p>Paragraph1</p>
+    <p>Paragraph2</p>
+  </template>
 </div>
 </template>
 
@@ -12,10 +17,11 @@ import Vue from "vue";
 import Component from "vue-class-component";
 @Component
 export default class App extends Vue {
-  activeColor: String = "red";
-  fontSize: String = "30";
-  styleObject: Object = { color: "blue", fontSize: "13px" };
-  styleObject2: Object = { "background-color": "red" };
+  ok: boolean = true;
+
+  reverse(): void {
+    this.ok = !this.ok;
+  }
 }
 </script>
 
