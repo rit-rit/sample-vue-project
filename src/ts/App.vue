@@ -1,9 +1,10 @@
 <template>
 <div>
-<h1 v-show="ok">V-Show</h1>
-<h1>Normal Show</h1>
-<br>
-<button @click="toggle">Toggle login Type</button>
+<ul>
+  <li v-for="(item,index) in items">
+    {{parentMessage}}-{{index}}-{{item.message}}
+  </li>
+</ul>
 </div>
 </template>
 
@@ -12,10 +13,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 @Component
 export default class App extends Vue {
-  ok: boolean = true;
-
-  toggle(): void {
-    this.ok = !this.ok;
-  }
+  items: Object[] = [{ message: "Foo" }, { message: "Bar" }];
+  parentMessage: String = "Parent";
 }
 </script>
