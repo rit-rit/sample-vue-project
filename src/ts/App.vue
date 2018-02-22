@@ -1,15 +1,8 @@
 <template>
 <div>
-  <div v-for="(value,key,index) in items">
-    {{index}}-{{key}}-{{value}}
-  </div>
-  <button @click="push">Push</button>
-  <button @click="pop">Pop</button>
-  <button @click="shift">Shift</button>
-  <button @click="unshift">Unshift</button>
-  <button @click="slice">Slice</button>
-  <button @click="sort">Sort</button>
-  <button @click="reverse">Reverse</button>
+<li v-for="n in evenNumbers">{{n}}</li>
+<br>
+<li v-for="n in even(numbers)">{{n}}</li>
 </div>
 </template>
 
@@ -18,39 +11,18 @@ import Vue from "vue";
 import Component from "vue-class-component";
 @Component
 export default class App extends Vue {
-  items: Object[] = [{ message: "Foo" }, { message: "Bar" }];
-  count: number = 0;
-  push(): void {
-    this.items.push({ message: "Baz" + this.count });
-    this.count = this.count + 1;
-  }
+  numbers: number[] = [1, 2, 3, 4, 5];
 
-  pop(): void {
-    this.items.pop();
-  }
-
-  shift(): void {
-    this.items.shift();
-  }
-  unshift(): void {
-    this.items.unshift({ message: "Baz" + this.count });
-    this.count = this.count + 1;
-  }
-
-  slice(): void {
-    this.items = this.items.slice(2);
-  }
-
-  sort(): void {
-    this.items.sort(function(a: any, b: any): number {
-      a = a["message"];
-      b = b["message"];
-      return a == b ? 0 : a > b ? 1 : -1;
+  get evenNumbers(): number[] {
+    return this.numbers.filter(function(number) {
+      return number % 2 == 0;
     });
   }
 
-  reverse(): void {
-    this.items.reverse();
+  even(): number[] {
+    return this.numbers.filter(function(number) {
+      return number % 2 == 0;
+    });
   }
 }
 </script>
