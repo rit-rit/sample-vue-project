@@ -1,7 +1,6 @@
 <template>
 <div>
-<button v-on:click="counter+=1">Add 1</button>
-<p>The button above has been clicked {{ counter}} times</p>
+<button v-on:click="greet">Greet</button>
 </div>
 </template>
 
@@ -10,7 +9,13 @@ import Vue from "vue";
 import Component from "vue-class-component";
 @Component
 export default class App extends Vue {
-  counter: number = 0;
+  name: String = "Vue.js";
+  greet(event: Event): void {
+    alert("Hello " + this.name);
+    if (event) {
+      alert(event.target);
+    }
+  }
 }
 </script>
 
