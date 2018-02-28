@@ -1,6 +1,8 @@
 <template>
 <div>
-<button v-on:click="greet">Greet</button>
+<button v-on:click="say('hi')">Say hi</button>
+<button v-on:click="say('what')">Say what</button>
+<button v-on:click="warn('Form cannot be submited yet.',$event)">Say what</button>
 </div>
 </template>
 
@@ -9,12 +11,13 @@ import Vue from "vue";
 import Component from "vue-class-component";
 @Component
 export default class App extends Vue {
-  name: String = "Vue.js";
-  greet(event: Event): void {
-    alert("Hello " + this.name);
-    if (event) {
-      alert(event.target);
-    }
+  say(message: string): void {
+    alert(message);
+  }
+
+  warn(message: string, event: Event): void {
+    if (event) event.preventDefault();
+    alert(message);
   }
 }
 </script>
