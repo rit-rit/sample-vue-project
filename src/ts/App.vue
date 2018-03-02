@@ -1,8 +1,19 @@
 <template>
 <div>
-<button v-on:click="say('hi')">Say hi</button>
-<button v-on:click="say('what')">Say what</button>
-<button v-on:click="warn('Form cannot be submited yet.',$event)">Say what</button>
+  <a v-on:click="doThis">Simple Do this</a>
+  <br>
+<a v-on:click.stop="doThis">Stop Do this</a>
+<br>
+<form v-on:submit.prevent="onSubmit"></form>
+
+<a v-on:click.stop="doThat">Stop Do that</a>
+<br>
+<form v-on:submit.prevent></form>
+
+<div v-on:click.capture="doThis">Capture aaa</div>
+<br>
+<div v-on:click.self="doThat">Self bbb</div>
+
 </div>
 </template>
 
@@ -11,13 +22,11 @@ import Vue from "vue";
 import Component from "vue-class-component";
 @Component
 export default class App extends Vue {
-  say(message: string): void {
-    alert(message);
+  doThis(event: Event): void {
+    alert("Do this");
   }
-
-  warn(message: string, event: Event): void {
-    if (event) event.preventDefault();
-    alert(message);
+  doThat(event: Event): void {
+    alert("Do that");
   }
 }
 </script>
