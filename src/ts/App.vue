@@ -2,66 +2,53 @@
 <div>
   <dl>
     <dt>
-      Enter
+      Alt+C
     </dt>
     <dd>
-      <input v-on:keyup.enter="hoge('Enter',$event)">
+      <input v-on:keyup.alt.67="hoge('Alt+C',$event)">
     </dd>
     <dt>
-      Tab
+      Ctrl+any
     </dt>
     <dd>
-      <input v-on:keyup.tab="hoge('Tab',$event)">
+      <input v-on:keyup.ctrl="hoge('Ctrl+E',$event)">
     </dd>
     <dt>
-      Delete
+      Shift+any
     </dt>
     <dd>
-      <input v-on:keyup.delete="hoge('Delete',$event)">
+      <input v-on:keyup.shift="hoge('Shift',$event)">
     </dd>
     <dt>
-      Escape
+      Meta+any
     </dt>
     <dd>
-      <input v-on:keyup.esc="hoge('Escape',$event)">
+      <input v-on:keyup.meta="hoge('Meta',$event)">
     </dd>
     <dt>
-      Space
+      Exact Ctrl
     </dt>
     <dd>
-      <input v-on:keyup.space="hoge('Space',$event)">
+      <button v-on:click.ctrl.exact="hoge('Exact Ctrl',$event)"></button>
     </dd>
     <dt>
-      Up
+      Left Click
     </dt>
     <dd>
-      <input v-on:keyup.up="hoge('Up',$event)">
+      <input v-on:click.left="hoge('Left Click',$event)">
     </dd>
     <dt>
-      Down
+      Middle Click
     </dt>
     <dd>
-      <input v-on:keyup.down="hoge('Down',$event)">
+      <input v-on:click.middle="hoge('Middle Click',$event)">
     </dd>
     <dt>
-      Left
+      Right Click
     </dt>
     <dd>
-      <input v-on:keyup.left="hoge('Left',$event)">
+      <input v-on:click.right="hoge('Right Click',$event)">
     </dd>
-    <dt>
-      Right
-    </dt>
-    <dd>
-      <input v-on:keyup.right="hoge('Right',$event)">
-    </dd>
-    <dt>
-      PageDown
-    </dt>
-    <dd>
-      <input v-on:keyup.page-down="hoge('PageDown',$event)">
-    </dd>
-
   </dl>
 </div>
 </template>
