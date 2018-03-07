@@ -1,57 +1,39 @@
 <template>
 <div>
-  <h1>Text</h1>
-    <input v-model="message1" placeholder="Edit me">
-    <p>Message is {{message1}}</p>
-  
-  <h1>Multiline Text</h1>
-  <span>Multiline message is:</span>
-  <p style="white-space: pre-line;">{{message2}}</p>
+  <h1>Basic</h1>
+  <input type="radio" v-model="picked" value="a">
+  <span>{{picked}}</span>
   <br>
-  <textarea v-model="message2" placeholder="Add multiple lines"></textarea>
-  <h1>Checkbox</h1>
-  <input type="checkbox" id="checkbox1" v-model="checked1">
-  <label for="checkbox1">{{checked1}}</label>
-  <h2>Multiple checkboxes</h2>
-  <div id="example-3">
-    <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
-    <label for="jack">Jack</label>
-    <input type="checkbox" id="john" value="John" v-model="checkedNames">
-    <label for="john">John</label>
-    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
-    <label for="mike">Mike</label>
-    <br>
-    <span>Checked names:{{checkedNames}}</span>
-  </div>
-  <h1>Radio button</h1>
-  <input type="radio" id="one" value="One" v-model="picked">
-  <label for="one">One</label>
-  <input type="radio" id="two" value="Two" v-model="picked">
-  <label for="two">Two</label>
+  <input type="checkbox" v-model="toggle">
+  <span>{{toggle}}</span>
   <br>
-  <span>Picked:{{picked}}</span>
-  <h1>Select</h1>
   <select v-model="selected">
-    <option disabled value="">Please select one</option>
-    <option>A</option>
-    <option>B</option>
-    <option>C</option>
+    <option value="abc">ABC</option>
   </select>
-  <span>Selected:{{selected}}</span>
-  <h2>Multiple select</h2>
-  <select v-model="selected2" multiple>
-    <option>A</option>
-    <option>B</option>
-    <option>C</option>
-  </select>
-  <span>Selected:{{selected2}}</span>
-  <h2>Dynamic options</h2>
-  <select v-model="selected3">
-    <option v-for="option in options" v-bind:value="option.value" v-bind:key="option.text">
-      {{option.text}}
-    </option>
-  </select>
-  <span>Selected:{{selected3}}</span>
+  <span>{{selected}}</span>
+  <h1>Bind value to property</h1>
+  <h2>Checkbox</h2>
+  <input type="checkbox" v-model="toggle2" true-value="yes" false-value="no">
+  <span>toggle==="yes":{{toggle2==="yes"}}</span>
+  <h2>Radio</h2>
+  <input type="radio" v-model="pick" v-bind:value="a">
+  <label>a</label>
+  <input type="radio" v-model="pick" v-bind:value="b">
+  <label>b</label>
+  <br>
+  <span>pick===a:{{pick===a}}</span>
+
+  <h2>Select Option</h2>
+  <select v-model="selected2">
+    <option v-bind:value="{number:123}">123</option>
+    <option v-bind:value="{number:456}">456</option>
+  </select> 
+  <br>
+  <span>typeof selected2:{{typeof selected2}}</span>
+  <br>
+  <span>selected.number:{{selected2.number}}</span>
+
+
 </div>
 </template>
 
@@ -60,19 +42,14 @@ import Vue from "vue";
 import Component from "vue-class-component";
 @Component
 export default class App extends Vue {
-  message1: string = "";
-  message2: string = "";
-  checked1: boolean = true;
-  checkedNames: string[] = [];
-  picked: string[] = [];
+  picked: string = "";
+  toggle: boolean = false;
   selected: string = "";
-  selected2: string[] = [];
-  selected3: string = "A";
-  options: object[] = [
-    { text: "One", value: "A" },
-    { text: "Two", value: "B" },
-    { text: "Three", value: "C" }
-  ];
+
+  toggle2: boolean = false;
+  pick: boolean = false;
+  a: boolean = false;
+  selected2: object = {};
 }
 </script>
 
