@@ -1,24 +1,28 @@
 <template>
 <div>
-  <h1>App</h1>
-  <span>{{message}}</span>
-  <input v-model="message">
-  <br>
-  <child :val="message"></child>
+  <div>
+    <p>{{total}}</p>
+    <buttoncounter v-on:increment="incrementTotal"></buttoncounter>
+    <buttoncounter v-on:increment="incrementTotal"></buttoncounter>
+  </div>
 </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import Child from "./Child.vue";
+import { Prop } from "vue-property-decorator";
+import ButtonCounter from "./button-counter.vue";
 @Component({
   components: {
-    child: Child
+    buttoncounter: ButtonCounter
   }
 })
 export default class App extends Vue {
-  message: string = "hello";
+  total: number = 0;
+  incrementTotal(): void {
+    this.total++;
+  }
 }
 </script>
 
