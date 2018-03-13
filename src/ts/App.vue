@@ -1,9 +1,9 @@
 <template>
 <div>
   <div>
-    <p>{{total}}</p>
-    <buttoncounter v-on:increment="incrementTotal"></buttoncounter>
-    <buttoncounter v-on:increment="incrementTotal"></buttoncounter>
+    <p v-for="message in messages" v-bind:key="message">
+      {{message}}</p>
+      <messageEventExample v-on:message="handleMessage"></messageEventExample>
   </div>
 </div>
 </template>
@@ -12,16 +12,16 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
-import ButtonCounter from "./button-counter.vue";
+import MessageEventExample from "./MessageEventExample.vue";
 @Component({
   components: {
-    buttoncounter: ButtonCounter
+    messageEventExample: MessageEventExample
   }
 })
 export default class App extends Vue {
-  total: number = 0;
-  incrementTotal(): void {
-    this.total++;
+  messages: string[] = [];
+  handleMessage(payload: any): void {
+    this.messages.push(payload.message);
   }
 }
 </script>
