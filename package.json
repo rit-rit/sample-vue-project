@@ -47,6 +47,7 @@
     "vue": "^2.5.13",
     "vue-class-component": "^6.1.2",
     "vue-loader": "^13.7.0",
+    "vue-property-decorator": "^6.0.0",
     "vue-template-compiler": "^2.5.13",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.10.1",
