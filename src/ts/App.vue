@@ -1,25 +1,33 @@
 <template>
 <div>
-  <appLayout>
-    <h1 slot="header">Here might be a page title</h1>
-    <p>A paragraph for the main content.</p>
-    <p>And another one.</p>
-    <p slot="footer">Here's some content info</p>
-  </appLayout>
+  <component v-bind:is="currentView"></component>
+  <button @click="switchView">Switch</button>
 </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import AppLayout from "./AppLayout.vue";
+import SampleView1 from "./SampleView1.vue";
+import SampleView2 from "./SampleView2.vue";
 @Component({
   components: {
-    appLayout: AppLayout
+    sampleView1: SampleView1,
+    sampleView2: SampleView2
   }
 })
 export default class App extends Vue {
-  value: string = "";
+  currentView: any = "sampleView1";
+  isView1: boolean = true;
+  switchView(): void {
+    if (this.isView1) {
+      this.isView1 = false;
+      this.currentView = "sampleView2";
+    } else {
+      this.isView1 = true;
+      this.currentView = "sampleView1";
+    }
+  }
 }
 </script>
 
