@@ -1,7 +1,7 @@
 <template>
   <div>
     <button @click="show = !show">Toggle</button>
-    <transition name="slide-fade">
+    <transition name="fade">
       <p v-if="show">Hello</p>
     </transition>
   </div>
@@ -17,16 +17,13 @@ export default class App extends Vue {
 </script>
 
 <style>
-.slide-fade-enter-active {
-  transition: all 0.3s ease;
-}
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
 
-.slide-fade-enter,
-.slide-fade-leave-to {
-  transform: translateX(10px);
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 </style>
