@@ -1,8 +1,8 @@
 <template>
   <div>
     <button @click="show = !show">Toggle</button>
-    <transition name="slide-fade">
-      <p v-if="show">Hello</p>
+    <transition name="bounce">
+      <p v-if="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.</p>
     </transition>
   </div>
 </template>
@@ -17,16 +17,21 @@ export default class App extends Vue {
 </script>
 
 <style>
-.slide-fade-enter-active {
-  transition: all 0.3s ease;
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
 }
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+.bounce-leave-active {
+  animation: bounce-in 0.5s alternate-reverse;
 }
-
-.slide-fade-enter,
-.slide-fade-leave-to {
-  transform: translateX(10px);
-  opacity: 0;
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
