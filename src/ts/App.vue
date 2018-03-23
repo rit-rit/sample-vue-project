@@ -1,8 +1,9 @@
 <template>
   <div>
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
     <button @click="show = !show">Toggle</button>
-    <transition name="bounce">
-      <p v-if="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.</p>
+    <transition name="custom-classes-transition" emter-active-class="animated tada" leave-active-class="animated bounceOutRight">
+      <p v-if="show">hello</p>
     </transition>
   </div>
 </template>
@@ -15,23 +16,3 @@ export default class App extends Vue {
   show: boolean = true;
 }
 </script>
-
-<style>
-.bounce-enter-active {
-  animation: bounce-in 0.5s;
-}
-.bounce-leave-active {
-  animation: bounce-in 0.5s alternate-reverse;
-}
-@keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.5);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-</style>
