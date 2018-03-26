@@ -1,14 +1,22 @@
 <template>
   <div>
     <button @click="show = !show">Toggle</button>
-    <transition
-  appear
-  appear-class="custom-appear-class"
-  appear-to-class="custom-appear-to-class"
-  appear-active-class="custom-appear-active-class"
->
-<p v-if="show">Hello</p>
-</transition>
+    <transition name="slide-fade">
+      <p v-if="show" key="1">Hello</p>
+     <p v-else key="2">Hello Else</p>
+    </transition>
+    <br>
+    <button @click="show = !show">Toggle</button>
+    <transition name="slide-fade" mode="out-in"> 
+      <p v-if="show" key="1">Hello</p>
+     <p v-else key="2">Hello Else</p>
+    </transition>
+    <br>
+    <button @click="show = !show">Toggle</button>
+    <transition name="slide-fade" mode="in-out"> 
+      <p v-if="show" key="1">Hello</p>
+     <p v-else key="2">Hello Else</p>
+    </transition>
   </div>
 </template>
 
@@ -22,14 +30,14 @@ export default class App extends Vue {
 </script>
 
 <style>
-.custom-appear-class {
+.slide-fade-enter-active {
   transition: all 0.3s ease;
 }
-.custom-appear-to-class {
+.slide-fade-leave-active {
   transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
-
-.custom-appear-active-class {
+.slide-fade-enter,
+.slide-fade-leave-to {
   transform: translateX(10px);
   opacity: 0;
 }
