@@ -1,21 +1,9 @@
 <template>
   <div>
-    <button @click="show = !show">Toggle</button>
-    <transition name="slide-fade">
-      <p v-if="show" key="1">Hello</p>
-     <p v-else key="2">Hello Else</p>
-    </transition>
-    <br>
-    <button @click="show = !show">Toggle</button>
-    <transition name="slide-fade" mode="out-in"> 
-      <p v-if="show" key="1">Hello</p>
-     <p v-else key="2">Hello Else</p>
-    </transition>
-    <br>
-    <button @click="show = !show">Toggle</button>
-    <transition name="slide-fade" mode="in-out"> 
-      <p v-if="show" key="1">Hello</p>
-     <p v-else key="2">Hello Else</p>
+    <input type="radio" id="A" value="v-a" v-model="view"><label>A</label>
+    <input type="radio"  id="B" value="v-b" v-model="view"><label>B</label>
+    <transition name="slide-fade" mode="out-in">
+      <component v-bind:is="view"></component>
     </transition>
   </div>
 </template>
@@ -23,9 +11,14 @@
 <script lang="ts">
 import Component from "vue-class-component";
 import Vue from "vue";
-@Component
+@Component({
+  components: {
+    "v-a": { template: "<div>Component A</div>" },
+    "v-b": { template: "<div>Component B</div>" }
+  }
+})
 export default class App extends Vue {
-  show: boolean = true;
+  view: string = "v-a";
 }
 </script>
 
