@@ -1,37 +1,49 @@
 <template>
   <div>
-    <input type="radio" id="A" value="v-a" v-model="view"><label>A</label>
-    <input type="radio"  id="B" value="v-b" v-model="view"><label>B</label>
-    <transition name="slide-fade" mode="out-in">
-      <component v-bind:is="view"></component>
-    </transition>
+    <button @click="add">Add</button>
+    <button @click="remove">Remove</button>
+    <transition-group name="list" tag="p">
+      <span v-for="item in items" :key="item" class="list-item">
+        {{item}}
+      </span>
+    </transition-group>
   </div>
 </template>
 
 <script lang="ts">
 import Component from "vue-class-component";
 import Vue from "vue";
-@Component({
-  components: {
-    "v-a": { template: "<div>Component A</div>" },
-    "v-b": { template: "<div>Component B</div>" }
-  }
-})
+@Component
 export default class App extends Vue {
-  view: string = "v-a";
+  items: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  nextNum: number = 10;
+  add(): void {
+    this.items.splice(this.randomIndex(), 0, this.nextNum++);
+  }
+
+  randomIndex(): number {
+    return Math.floor(Math.random() * this.items.length);
+  }
+
+  remove(): void {
+    this.items.splice(this.randomIndex(), 1);
+  }
 }
 </script>
 
 <style>
-.slide-fade-enter-active {
-  transition: all 0.3s ease;
+.list-item {
+  display: inline-block;
+  margin-right: 10px;
 }
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+.list-enter-active,
+.list-leave-active {
+  transition: all 1s;
 }
-.slide-fade-enter,
-.slide-fade-leave-to {
-  transform: translateX(10px);
+
+.list-enter,
+.list-leave-to {
   opacity: 0;
+  transform: translateY(30px);
 }
 </style>
