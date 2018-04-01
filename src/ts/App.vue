@@ -1,41 +1,57 @@
 <template>
-<div id="list-complete-demo" class="demo">
-  <button v-on:click="shuffle">Shuffle</button>
-  <button v-on:click="add">Add</button>
-  <button v-on:click="remove">Remove</button>
-  <transition-group name="list-complete" tag="p">
-    <span
-      v-for="item in items"
-      v-bind:key="item"
-      class="list-complete-item"
-    >
-      {{ item }}
-    </span>
+<div id="staggered-list-demo">
+  <input v-model="query">
+  <transition-group
+    name="staggered-fade"
+    tag="ul"
+    v-bind:css="false"
+    v-on:before-enter="beforeEnter"
+    v-on:enter="enter"
+    v-on:leave="leave"
+  >
+    <li
+      v-for="(item, index) in computedList"
+      v-bind:key="item.msg"
+      v-bind:data-index="index"
+    >{{ item.msg }}</li>
   </transition-group>
 </div>
 </template>
 
 <script lang="ts">
-import lodash from "lodash";
+import velociry from "velocity-animate";
 import Component from "vue-class-component";
+import Computed from "vue-class-component";
 import Vue from "vue";
+import { List } from "lodash";
 @Component
 export default class App extends Vue {
-  items: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  nextNum: number = 10;
-  add(): void {
-    this.items.splice(this.randomIndex(), 0, this.nextNum++);
+  query: string = "";
+  list: { [key: string]: string }[] = [
+    { msg: "Bruce Lee" },
+    { msg: "Jackie Chen" },
+    { msg: "Chunck Norris" },
+    { msg: "Jet Li" },
+    { msg: "Kung Fury" }
+  ];
+
+  get computedList(): any {
+    return this.list.filter(function(this: App, item): boolean {
+      return item.msg.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;
+    });
   }
 
-  randomIndex(): number {
-    return Math.floor(Math.random() * this.items.length);
+  beforeEnter(el: HTMLElement): void {
+    el.style.opacity = "0";
+    el.style.height = "0";
   }
 
-  remove(): void {
-    this.items.splice(this.randomIndex(), 1);
-  }
-  shuffle(): void {
-    this.items = lodash.shuffle(this.items);
+  enter(el: HTMLElement, done: any): void {
+    var delay: number;
+    delay = Number(el.dataset.index) * 150;
+    setTimeout(function() {
+      Velocity(el, { opacity: "1", height: "1.6em" }, { compute: done });
+    }, delay);
   }
 }
 </script>
