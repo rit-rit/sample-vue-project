@@ -1,73 +1,27 @@
 <template>
-<div id="staggered-list-demo">
-  <input v-model="query">
-  <transition-group
-    name="staggered-fade"
-    tag="ul"
-    v-bind:css="false"
-    v-on:before-enter="beforeEnter"
-    v-on:enter="enter"
-    v-on:leave="leave"
-  >
-    <li
-      v-for="(item, index) in computedList"
-      v-bind:key="item.msg"
-      v-bind:data-index="index"
-    >{{ item.msg }}</li>
-  </transition-group>
+<div>
+  <input v-model.number="num" type="number" step="20">
+  <p>{{animatedNumber}}</p>
 </div>
 </template>
 
 <script lang="ts">
-import velociry from "velocity-animate";
 import Component from "vue-class-component";
-import Computed from "vue-class-component";
+import { Watch } from "vue-property-decorator";
+import { TweenLite } from "gsap";
 import Vue from "vue";
-import { List } from "lodash";
 @Component
 export default class App extends Vue {
-  query: string = "";
-  list: { [key: string]: string }[] = [
-    { msg: "Bruce Lee" },
-    { msg: "Jackie Chen" },
-    { msg: "Chunck Norris" },
-    { msg: "Jet Li" },
-    { msg: "Kung Fury" }
-  ];
+  num: number = 0;
+  tweenedNumber: number = 0;
 
-  get computedList(): any {
-    return this.list.filter(function(this: App, item): boolean {
-      return item.msg.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;
-    });
+  get animatedNumber(): string {
+    return this.tweenedNumber.toFixed(0);
   }
-
-  beforeEnter(el: HTMLElement): void {
-    el.style.opacity = "0";
-    el.style.height = "0";
-  }
-
-  enter(el: HTMLElement, done: any): void {
-    var delay: number;
-    delay = Number(el.dataset.index) * 150;
-    setTimeout(function() {
-      Velocity(el, { opacity: "1", height: "1.6em" }, { compute: done });
-    }, delay);
+  @Watch("num")
+  onnumber(newValue: string): void {
+    console.log("AA");
+    TweenLite.to(this.num, 0.5, { tweenedNumber: newValue });
   }
 }
 </script>
-
-<style>
-.list-complete-item {
-  transition: all 1s;
-  display: inline-block;
-  margin-right: 10px;
-}
-.list-complete-enter,
-.list-complete-leave-to {
-  opacity: 0;
-  transform: translateY(30px);
-}
-.list-complete-leave-active {
-  position: absolute;
-}
-</style>
