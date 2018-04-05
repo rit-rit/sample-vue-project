@@ -1,10 +1,15 @@
 <template>
 <div>
-  <input v-model="colorQuery" @keyup.enter="updateColor" placeholder="Enter a color">
-  <button v-on:click="updateColor">Update</button>
-  <p>Preview:</p>
-  <span v-bind:style="{ backgroundColor:tweenedCSSColor }" class="example-7-color-preview"></span>
-  <p>{{tweenedCSSColor}}</p>
+  <svg width="200" height="200">
+    <polygon :points="points"></polygon>
+    <circle cx="100" cy="100" r="90"></circle>
+  </svg>
+  <label>Sides: {{sides}}</label>
+  <input type="range" min="3" max="500" v-model.number="sides">
+  <label>Minimum Radius: {{minRadius}}%</label>
+  <input type="range" min="0" max="90" v-model.number="minRadius">
+  <label>Update Interval: {{updateInterval}} milliseconds</label>
+  <input type="range" min="10" max="2000" v-model.number="updateInterval">
 </div>
 </template>
 
@@ -13,67 +18,111 @@ import Component from "vue-class-component";
 import { Watch } from "vue-property-decorator";
 
 import Vue from "vue";
-import * as TWEEN from "@tweenjs/tween.js";
+import { TweenLite } from "gsap";
 @Component
 export default class App extends Vue {
-  colorQuery: string = "";
-  color: {} = { red: 0, green: 0, blue: 0, alpha: 255 };
-  tweenedColor: {
-    [key: string]: number;
-  } = {
-    red: 0,
-    green: 0,
-    blue: 0,
-    alpha: 255
-  };
+  defaultSides: number = 10;
+  stats: Array<number> = Array.apply(null, { length: this.defaultSides }).map(
+    function() {
+      return 100;
+    }
+  );
+  points: any = this.generatePoints(this.stats);
+  sides: number = this.defaultSides;
+  minRadius: number = 50;
+  interval: any = null;
+  updateInterval: number = 500;
 
-  created() {
-    this.tweenedColor = this.color;
-  }
-
-  @Watch("color")
-  onChange(): void {
-    console.log("ONCHANGE");
-    function animate() {
-      if (TWEEN.update()) {
-        requestAnimationFrame(animate);
+  @Watch("sides")
+  updateSides(newSides: number, oldSides: number): void {
+    var sidesDifference: number = newSides - oldSides;
+    if (sidesDifference > 0) {
+      for (var i: number = 1; i <= sidesDifference; i++) {
+        this.stats.push(this.newRandomValue());
+      }
+    } else {
+      var absoluteSidesDifference: number = Math.abs(sidesDifference);
+      for (var i: number = 1; i <= absoluteSidesDifference; i++) {
+        this.stats.shift();
       }
     }
-
-    new TWEEN.Tween(this.tweenedColor).to(this.color, 750).start();
-    animate();
-    console.log("ONCHANGE END");
+  }
+  @Watch("stats")
+  updateStats(newStats: Array<number>): void {
+    TweenLite.to(this.$data, this.updateInterval / 1000, {
+      points: this.generatePoints(newStats)
+    });
+  }
+  @Watch("updateInterval")
+  updateUpdateInterval(): void {
+    this.resetInterval();
   }
 
-  get tweenedCSSColor(): string {
-    return (
-      "rgba(" +
-      this.tweenedColor.red +
-      "," +
-      this.tweenedColor.green +
-      "," +
-      this.tweenedColor.blue +
-      "," +
-      "255" +
-      ")"
-    );
+  mounted() {
+    this.resetInterval();
   }
 
-  updateColor(): void {
-    this.color = {
-      red: this.colorQuery.substring(0, 2),
-      green: this.colorQuery.substring(2, 4),
-      blue: this.colorQuery.substring(4, 6)
-    };
-    this.colorQuery = "";
+  randomizeStats(): void {
+    var vm: this = this;
+    this.stats = this.stats.map(function() {
+      return vm.newRandomValue();
+    });
+  }
+  newRandomValue(): number {
+    return Math.ceil(this.minRadius + Math.random() * (100 - this.minRadius));
+  }
+
+  resetInterval(): void {
+    var vm: this = this;
+    clearInterval(this.interval);
+    this.randomizeStats();
+    this.interval = setInterval(function() {
+      vm.randomizeStats();
+    }, this.updateInterval);
+  }
+
+  valueToPoint(
+    value: number,
+    index: number,
+    total: number
+  ): { [key: string]: number } {
+    var x: number = 0;
+    var y: number = -value * 0.9;
+    var angle: number = Math.PI * 2 / total * index;
+    var cos: number = Math.cos(angle);
+    var sin: number = Math.sin(angle);
+    var tx: number = x * cos - y * sin + 100;
+    var ty: number = x * sin + y * cos + 100;
+    return { x: tx, y: ty };
+  }
+
+  generatePoints(stats: Array<number>): string {
+    var vm: this = this;
+    var total = stats.length;
+    return stats
+      .map(function(stat, index) {
+        var point = vm.valueToPoint(stat, index, total);
+        return point.x + "," + point.y;
+      })
+      .join(" ");
   }
 }
 </script>
 
 <style>
-.example-7-color-preview {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
+svg {
+  display: block;
+}
+polygon {
+  fill: #31b883;
+}
+circle {
+  fill: transparent;
+  stroke: #35495e;
+}
+input[tyoe="range"] {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
 }
 </style>
