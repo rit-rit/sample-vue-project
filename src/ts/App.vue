@@ -1,5 +1,5 @@
 <template>
-<div id="hook-arguments-example" v-demo:foo.a.b="message">
+<div id="hook-arguments-example" v-demo="{color:'white',text:'hello'}">
 </div>
 </template>
 
@@ -15,25 +15,8 @@ import { VNode } from "vue/types/vnode";
         binding: { [key: string]: any },
         vnode: VNode
       ): void {
-        var s = JSON.stringify;
-        el.innerHTML =
-          "name:" +
-          s(binding.name) +
-          "<br>" +
-          "value: " +
-          s(binding.value) +
-          "<br>" +
-          "expression: " +
-          s(binding.expression) +
-          "<br>" +
-          "argument: " +
-          s(binding.arg) +
-          "<br>" +
-          "modifiers: " +
-          s(binding.modifiers) +
-          "<br>" +
-          "vnode keys: " +
-          Object.keys(vnode).join(", ");
+        console.log(binding.value.color);
+        console.log(binding.value.text);
       }
     }
   }
