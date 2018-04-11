@@ -52,7 +52,7 @@
     "typescript": "^2.6.2",
     "typings": "^2.1.1",
     "vue": "^2.5.13",
-    "vue-class-component": "^6.1.2",
+    "vue-class-component": "^6.2.0",
     "vue-loader": "^13.7.0",
     "vue-property-decorator": "^6.0.0",
     "vue-template-compiler": "^2.5.13",
