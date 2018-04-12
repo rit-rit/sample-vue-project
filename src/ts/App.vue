@@ -1,6 +1,6 @@
 <template>
-<div id="hook-arguments-example" v-demo="{color:'white',text:'hello'}">
-</div>
+ <div id="hook-arguments-example" v-demo="{color:'white',text:'hello'}">
+ </div>
 </template>
 
 <script lang="ts">
