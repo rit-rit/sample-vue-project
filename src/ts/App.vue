@@ -1,27 +1,24 @@
 <template>
- <div id="hook-arguments-example" v-demo="{color:'white',text:'hello'}">
- </div>
+<div v-bind:id="rawId|formatId">
+  {{message|capitalize}}
+</div>
+ 
 </template>
 
 <script lang="ts">
 import Component from "vue-class-component";
+import Filter from "vue-property-decorator";
 import Vue from "vue";
 import { VNode } from "vue/types/vnode";
-@Component({
-  directives: {
-    demo: {
-      bind: function(
-        el: HTMLElement,
-        binding: { [key: string]: any },
-        vnode: VNode
-      ): void {
-        console.log(binding.value.color);
-        console.log(binding.value.text);
-      }
-    }
-  }
-})
+@Component
 export default class App extends Vue {
-  message: string = "hello";
+  capitalize: string;
+
+  @Filter("capitalize", true)
+  filterCapitalize(value: boolean): string {
+    if (!value) return "";
+    var str: string = value.toString();
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
 }
 </script>
