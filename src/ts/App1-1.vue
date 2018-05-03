@@ -4,9 +4,9 @@
 
 <script lang="ts">
 import Vue from "vue";
-export default Vue.extend({
-  data() {
-    return { message: "Hello World!!" };
-  }
-});
+import Components from "vue-class-component";
+@Components
+export default class App extends Vue {
+  message: string = "Hello World!!";
+}
 </script>
