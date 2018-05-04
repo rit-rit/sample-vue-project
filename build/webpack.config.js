@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const StringReplacePlugin = require('string-replace-webpack-plugin');
 
 module.exports = {
   entry: './src/ts/main.ts',
@@ -11,6 +12,19 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /main\.ts$/,
+        loader: StringReplacePlugin.replace({
+          replacements: [
+            {
+              pattern: /\${APP}/,
+              replacement: function(match, p1, offset, string) {
+                return env;
+              },
+            },
+          ],
+        }),
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -43,6 +57,7 @@ module.exports = {
       },
     ],
   },
+  plugins: [new StringReplacePlugin()],
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
