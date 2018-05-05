@@ -6,9 +6,9 @@
 
 <script lang="ts">
 import Vue from "vue";
-export default Vue.extend({
-  data() {
-    return { message: "You loaded thid page on " + new Date().toString() };
-  }
-});
+import Component from "vue-class-component";
+@Component
+export default class App extends Vue {
+  message: string = "You loaded thid page on " + new Date().toString();
+}
 </script>
