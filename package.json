@@ -4,7 +4,8 @@
   "description": "This is a sample vue project.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config build/webpack.config.js --progress --colors",
+    "build":
+      "webpack --config build/webpack.config.js --progress --colors --env.targetComponent",
     "clean": "gts clean",
     "watch": "webpack -d --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
