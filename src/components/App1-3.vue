@@ -6,9 +6,9 @@
 
 <script lang="ts">
 import Vue from "vue";
-export default Vue.extend({
-  data() {
-    return { seen: true };
-  }
-});
+import Component from "vue-class-component";
+@Component
+export default class App extends Vue {
+  seen: boolean = true;
+}
 </script>
