@@ -24,18 +24,17 @@
 
 <script lang="ts">
 import Vue from "vue";
-export default Vue.extend({
-  data() {
-    return {
-      msg: "Message",
-      rawHtml: "<span style='color:red'>This should be red</span>",
-      dynamicId: "Dynamic ID",
-      isButtonDisabled: true,
-      number: 1,
-      ok: true,
-      message: "Message",
-      id: "This is id"
-    };
-  }
-});
+import Component from "vue-class-component";
+
+@Component
+export default class App extends Vue {
+  msg: string = "Message";
+  rawHtml: string = "<span style='color:red'>This should be red</span>";
+  dynamicId: string = "Dynamic ID";
+  isButtonDisabled: boolean = true;
+  number: number = 1;
+  ok: boolean = true;
+  message: string = "Message";
+  id: string = "This is id";
+}
 </script>
