@@ -1,23 +1,18 @@
 <template>
   <div>
     <button @click="show = !show">Toggle</button>
-    <transition
-  appear
-  appear-class="custom-appear-class"
-  appear-to-class="custom-appear-to-class"
-  appear-active-class="custom-appear-active-class"
->
-<p v-if="show">Hello</p>
-</transition>
+    <transition appear appear-class="custom-appear-class" appear-to-class="custom-appear-to-class" appear-active-class="custom-appear-active-class">
+      <p v-if="show">Hello</p>
+    </transition>
   </div>
 </template>
 
 <script lang="ts">
-import Component from "vue-class-component";
-import Vue from "vue";
+import Component from 'vue-class-component'
+import Vue from 'vue'
 @Component
 export default class App extends Vue {
-  show: boolean = true;
+  show: boolean = true
 }
 </script>
 
