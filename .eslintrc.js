@@ -1,9 +1,10 @@
 module.exports = {
   env: {
-    es6: true,
+    es6: true
   },
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: 'babel-eslint'
   },
-  extends: 'google',
-};
+  plugins: ['vue'],
+  extends: ['google', 'vue']
+}
