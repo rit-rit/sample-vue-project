@@ -6,3 +6,11 @@ Tutorials for Vue.js with TypeScript.
 * typescript: ^2.6.2
 * vue-class-component: ^6.2.0
 * other dependencies: refer to link:https://github.com/rit-rit/sample-vue-project/blob/vue-tutorial/package.json[package.json]
+
+= Setup
+* Clone and install this project.
+```bash
+git clone https://github.com/rit-rit/sample-vue-project.git
+cd sample-vue-project
+npm install
+```
