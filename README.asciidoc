@@ -14,3 +14,15 @@ git clone https://github.com/rit-rit/sample-vue-project.git
 cd sample-vue-project
 npm install
 ```
+
+= Usage
+* Run build command
+```bash
+npm run build [Target File]
+```
+Example:
+```bash
+npm run build App1-1
+```
+
+* Open index.html
