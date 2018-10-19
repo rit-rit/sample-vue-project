@@ -26,3 +26,6 @@ npm run build App1-1
 ```
 
 * Open index.html
+
+= License
+* MIT License
