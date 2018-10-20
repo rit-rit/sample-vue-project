@@ -29,3 +29,6 @@ npm run build App1-1
 
 = License
 * MIT License
+
+= Authors
+* link:https://github.com/rit-rit[RIT80]
