@@ -32,3 +32,6 @@ npm run build App1-1
 
 = Authors
 * link:https://github.com/rit-rit[RIT80]
+
+= References
+* link:https://vuejs.org/index.html[Vue.js]
