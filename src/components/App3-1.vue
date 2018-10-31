@@ -1,25 +1,30 @@
 <template>
-<div>
-  <p>Message: {{msg}}</p>
-  <p v-once>This will never change: {{msg}}</p>
-  <button @click="msg=msg + 'a'">change</button>
-  <br>
-  <p>Using mastaches:{{rawHtml}}</p>
-  <p>Using v-html directive:<span v-html="rawHtml"></span></p>
-  <p v-bind:id="dynamicId">dynamicId</p>
-  <button @click="dynamicId=dynamicId + 'a'">change</button>
-  <br>
-  <button v-bind:disabled="isButtonDisabled">Button</button>
-  <button @click="isButtonDisabled=!isButtonDisabled">change</button>
-  <br>
-  {{number +1}}
-  <br>
-  {{ok?"YES":"NO"}}
-  <button @click="ok=!ok">change</button>
-  <br>
-  {{message.split('').reverse().join('')}}
-  <div v-bind:id="'list-' +id"></div>
-</div>
+  <div>
+    <h1>Text</h1>
+    <p>Message: {{msg}}</p>
+    <button @click="msg=msg + 'a'">change</button>
+
+    <h1>Raw HTML</h1>
+    <p>Using mastaches:{{rawHtml}}</p>
+    <p>Using v-html directive:
+      <span v-html="rawHtml"></span>
+    </p>
+    <p v-once>This will never change: {{msg}}</p>
+
+    <h1>Attributes</h1>
+    <p v-bind:id="dynamicId">dynamicId</p>
+    <button @click="dynamicId=dynamicId + 'a'">change</button>
+    <br>
+    <button v-bind:disabled="isButtonDisabled">Button</button>
+    <button @click="isButtonDisabled=!isButtonDisabled">change</button>
+
+    <h1>Using JavaScript Expressions</h1>
+    {{number +1}}
+    <br> {{ok?"YES":"NO"}}
+    <button @click="ok=!ok">change</button>
+    <br> {{message.split('').reverse().join('')}}
+    <div v-bind:id="'list-' +id"></div>
+  </div>
 </template>
 
 <script lang="ts">
