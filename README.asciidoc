@@ -24,6 +24,7 @@ Example:
 ```bash
 npm run build App1-1
 ```
+Please see link:https://rit-rit.github.io/sample-vue-project/[docs] for the pattern of Target files.
 
 * Open index.html
 
